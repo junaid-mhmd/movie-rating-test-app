@@ -67,7 +67,13 @@ function Movies() {
 
             let temp = [...movies]
 
-            temp.splice(temp.findIndex(i => i.id == secondItem.id), 1)
+            temp.forEach((i) => {
+                if (i.id == secondItem.id) {
+
+                    temp.splice(temp.findIndex(a => a.id == secondItem.id), 1)
+                }
+            })
+
             setMovies([...temp])
             firstItem.vote_count += 1;
 
@@ -78,7 +84,6 @@ function Movies() {
                 secondItem: ""
             })
 
-            // const nextMovie = 
 
             setTimeout(() => {
                 setDisplayMovies({ firstItem: displayMovies.firstItem, secondItem: movies[1] })
@@ -89,7 +94,13 @@ function Movies() {
             const firstItem = displayMovies.firstItem
 
             let temp = [...movies]
-            temp.splice(temp.findIndex(i => i.id == firstItem.id), 1)
+
+            temp.forEach((i) => {
+                if (i.id == firstItem.id) {
+
+                    temp.splice(temp.findIndex(a => a.id == firstItem.id), 1)
+                }
+            })
 
             setMovies([...temp])
             secondItem.vote_count += 1;
@@ -105,8 +116,6 @@ function Movies() {
             }, 1000)
         }
     }
-
-    console.log(movies, 'mv', votedMovies, "vm")
 
 
     if (loading) {
@@ -166,12 +175,12 @@ function Movies() {
                     <div className={styles.leaderboard}>
                         <h2>Leaderboard</h2>
                         {votedMovies.sort(function (a, b) {
-                            return a.vote_count - b.vote_count;
+                            return b.vote_count - a.vote_count;
                         }).map((i, index) => (
 
                             <div className={styles.movieItem} key={index}>
                                 <img src={i.poster_path ? BaseImageUrl + i.poster_path : '/empty.png'} alt="" />
-                                <h3><span>{i.title}</span><br />Rank #{i.vote_count}</h3>
+                                <h3><span>{i.title}</span><br />Vote #{i.vote_count}</h3>
                             </div>
                         ))}
                     </div>

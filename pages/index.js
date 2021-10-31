@@ -53,7 +53,6 @@ export default function Home() {
 			.request(options)
 			.then(function (response) {
 				setGenres(response.data.genres);
-				console.log(response);
 			})
 			.catch(function (error) {
 				console.error(error);
